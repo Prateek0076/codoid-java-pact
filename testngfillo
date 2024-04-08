@@ -1,0 +1,47 @@
+package test1;
+
+import com.codoid.products.exception.FilloException;
+import com.codoid.products.fillo.Connection;
+import com.codoid.products.fillo.Fillo;
+import com.codoid.products.fillo.Recordset;
+import org.testng.annotations.Test;
+
+import java.util.Scanner;
+
+public class Testcase1 {
+
+    private final Connection connection;
+
+    public Testcase1() throws FilloException {
+        Fillo fillo = new Fillo();
+        connection = fillo.getConnection("C:\\Users\\Vijip\\Desktop\\codoid testing\\java pact\\excel read\\fillo\\src\\read.xlsx");
+    }
+
+    @Test(priority = 1)
+    void search() throws FilloException {
+        java.lang.String name = "prateek";
+        java.lang.String strQuery = "Select * from Sheet1 where NAME = '" + name + "'";
+        Recordset recordset = connection.executeQuery(strQuery);
+
+        while (recordset.next()) {
+            System.out.println("ID : " + recordset.getField("ID"));
+            System.out.println("NAME : " + recordset.getField("name"));
+            System.out.println("ROLE : " + recordset.getField("Details"));
+        }
+        recordset.close();
+    }
+
+    @Test(priority = 2)
+    void insert() throws FilloException {
+        java.lang.String strQuery = "INSERT INTO Sheet2 (ID,NAME,DETAILS) VALUES(3,'sanjay','python')";
+        connection.executeUpdate(strQuery);
+    }
+@Test
+    void update(){
+
+        java.lang.String strQuery = " update"
+}
+
+
+
+}
